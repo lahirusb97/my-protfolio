@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import electron from "../assets/Icons/electron1.png";
 import js from "../assets/Icons/js.png";
 import reactjs from "../assets/Icons/reactjs.png";
@@ -6,16 +6,48 @@ import firebaselogo from "../assets/Icons/firebaselogo.png";
 import flutter from "../assets/Icons/flutter.png";
 import ts from "../assets/Icons/ts.png";
 import myIng from "../assets/new.jpg";
+import newIm from "../assets/myph.jpg";
 import { useContext } from "react";
 import { NavigationRef } from "../Context/NavigationRef";
 import useWindowDimensions from "./getWindowDimensions";
+import { motion } from "framer-motion";
 export default function About() {
   const { aboutRef } = useContext(NavigationRef);
   const { height, width } = useWindowDimensions();
+  const draw = {
+    hidden: {
+      pathLength: 0,
+      opacity: 0,
+    },
+    visible: {
+      pathLength: 1,
+      opacity: 1,
+    },
+  };
+  const hide = {
+    hidden: {
+      pathLength: 0,
+      opacity: 0,
+    },
+  };
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div ref={aboutRef}>
-      <div className="max-w-screen-xl md:flex  m-auto justify-between sm:items-center grid grid-cols-1 sm:grid-rows-2">
+      <div className="md:w-full aboutbar:w-96 md:flex  m-auto justify-between sm:items-center grid grid-cols-1  ">
         <div className="md:w-1/2  text-center md:row-start-2 row-end-3 m-4">
           <h1 className="text-white text-center mb-8 font-semibold text-lg">
             About Me
@@ -78,41 +110,30 @@ export default function About() {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <line
+              <motion.line
                 x1="5.5"
                 y1="2.40413e-07"
                 x2="5.49998"
                 y2="399"
                 stroke="#EBDC05"
-                stroke-width="11"
+                strokeWidth="11"
+                variants={scrollPosition > 300 ? draw : hide}
+                initial="hidden"
+                animate="visible"
+                transition={{
+                  pathLength: { duration: 1, ease: "linear" },
+                  opacity: { duration: 1 },
+                }}
               />
             </svg>
-            <div className="absolute left-4 -top-10">
-              <svg
-                width={`${width < 329 ? "50" : "350"}`}
-                height="11"
-                viewBox="0 0 399 11"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <line
-                  x1="0"
-                  y1="5.5"
-                  x2="399"
-                  y2="5.5"
-                  stroke="#EBDC05"
-                  stroke-width="11"
-                />
-              </svg>
-            </div>
           </div>
           <div className="relative">
             <img
               className="xsm:max-w-xs m-auto relative z-20 border-8 border-white"
-              src={myIng}
+              src={newIm}
             />
 
-            <div className="absolute right-0 w-full h-full z-10 -top-4 -left-4 bg-customPurple"></div>
+            <div className="absolute right-0  w-full h-full z-10 -top-4 -left-4 bg-customPurple"></div>
           </div>
         </div>
       </div>

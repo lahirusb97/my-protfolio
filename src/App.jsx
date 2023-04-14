@@ -36,6 +36,7 @@ function App() {
 
             <ul className=" flex text-sm">
               <li
+                className="cursor-pointer"
                 onClick={() => {
                   aboutRef.current.scrollIntoView({ behavior: "smooth" });
                 }}
@@ -43,14 +44,15 @@ function App() {
                 <a>About</a>
               </li>
               <li
+                className="cursor-pointer mx-8"
                 onClick={() => {
                   projectRef.current.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="mx-8"
               >
                 <a>Project's</a>
               </li>
               <li
+                className="cursor-pointer"
                 onClick={() => {
                   contactRef.current.scrollIntoView({ behavior: "smooth" });
                 }}

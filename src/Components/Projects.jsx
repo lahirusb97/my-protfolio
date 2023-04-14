@@ -5,6 +5,7 @@ import openIcon from "../assets/Icons/openIcon.png";
 import ProjecyItem from "./ProjecyItem";
 import { useContext } from "react";
 import { NavigationRef } from "../Context/NavigationRef";
+import { motion } from "framer-motion";
 export default function Projects() {
   const [itemIndex, setItemIndex] = useState(null);
   const { projectRef } = useContext(NavigationRef);
@@ -13,23 +14,7 @@ export default function Projects() {
     {
       id: 0,
       title: "Stock Management & Billing system",
-      disc: "shop owners can manage stocks items and add ,print bills calculate monthly income",
-      linkSource:
-        "https://github.com/lahirusb97/simple-stock-management-billing-system-.git",
-      liveLink: "https://mysamples-cbad4.web.app/",
-    },
-    {
-      id: 1,
-      title: "Stock Management & Billing system",
-      disc: "shop owners can manage stocks items and add ,print bills calculate monthly income",
-      linkSource:
-        "https://github.com/lahirusb97/simple-stock-management-billing-system-.git",
-      liveLink: "https://mysamples-cbad4.web.app/",
-    },
-    {
-      id: 2,
-      title: "Stock Management & Billing system",
-      disc: "shop owners can manage stocks items and add ,print bills calculate monthly income",
+      disc: "Shop owners can manage stocks items and add ,print bills calculate monthly income",
       linkSource:
         "https://github.com/lahirusb97/simple-stock-management-billing-system-.git",
       liveLink: "https://mysamples-cbad4.web.app/",
@@ -47,7 +32,7 @@ export default function Projects() {
       </h1>
       <div className="flex flex-wrap justify-center">
         {project.map((e, index) => (
-          <div
+          <motion.div
             key={e.id}
             onMouseOver={() => {
               setItemIndex(index);
@@ -63,7 +48,7 @@ export default function Projects() {
               linkSource={e.linkSource}
               liveLink={e.liveLink}
             />
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
